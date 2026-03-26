@@ -1,14 +1,14 @@
 export const APP_ENV = {
   logto: {
-    endpoint: "<YOUR_LOGTO_ENDPOINT>",
-    appId: "<YOUR_LOGTO_APP_ID>",
+    endpoint: "https://auth.learnsocialstudies.com",
+    appId: "avc4zf5kjm5rgc5xgsegh",
   },
   api: {
-    baseUrl: "http://localhost:3000",
-    resourceIndicator: "<YOUR_API_RESOURCE_INDICATOR>",
+    baseUrl: "https://api.learnsocialstudies.com",
+    resourceIndicator: "https://api.learnsocialstudies.com",
   },
   app: {
-    redirectUri: "http://localhost:5173/callback",
-    signOutRedirectUri: "http://localhost:5173/",
+    redirectUri: "https://saas.socialstudies.cloud/callback",
+    signOutRedirectUri: "https://saas.socialstudies.cloud",
   },
-} as const; 
+};
