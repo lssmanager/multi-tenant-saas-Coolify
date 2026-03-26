@@ -73,10 +73,3 @@ export const useApi = () => {
 
   return { fetchWithToken };
 };
-
-      throw new ApiRequestError(error instanceof Error ? error.message : String(error));
-    }
-  }, [getAccessToken, getOrganizationToken]);
-
-  return { fetchWithToken };
-}; 
