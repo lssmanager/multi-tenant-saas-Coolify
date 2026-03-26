@@ -74,10 +74,10 @@ const requireOrganizationAccess = ({ requiredScopes = [] } = {}) => {
       }
 
       // Verify the token with the audience
-      const payload = await verifyJwt(token, aud);
+      const payload = await verifyJwt(token, process.env.API_RESOURCE_INDICATOR);
 
       // Extract organization ID from the audience claim
-      const organizationId = extractOrganizationId(payload.aud);
+      const organizationId = payload.organization_id;
 
       // Get scopes from the token
       const scopes = payload.scope?.split(" ") || [];
