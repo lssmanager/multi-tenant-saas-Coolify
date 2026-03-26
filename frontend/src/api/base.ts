@@ -21,7 +21,7 @@ export class ApiRequestError extends Error {
 }
 
 export const useApi = () => {
-  const { getAccessToken, getOrganizationToken } = useLogto();
+  const { getAccessToken } = useLogto(); // ← getOrganizationToken ya no se necesita
 
   const fetchWithToken = useMemo(() => async (
     endpoint: string,
@@ -30,9 +30,10 @@ export const useApi = () => {
   ) => {
     try {
       let token: string | undefined;
-      
+
       if (organizationId) {
-        token = await getOrganizationToken(organizationId);
+        // ✅ Token con aud: https://api.learnsocialstudies.com + org_id en claims
+        token = await getAccessToken(DOCUMIND_API_RESOURCE_INDICATOR, organizationId);
       } else {
         token = await getAccessToken(DOCUMIND_API_RESOURCE_INDICATOR);
       }
@@ -66,6 +67,13 @@ export const useApi = () => {
       if (error instanceof ApiRequestError) {
         throw error;
       }
+      throw new ApiRequestError(error instanceof Error ? error.message : String(error));
+    }
+  }, [getAccessToken]);
+
+  return { fetchWithToken };
+};
+
       throw new ApiRequestError(error instanceof Error ? error.message : String(error));
     }
   }, [getAccessToken, getOrganizationToken]);
